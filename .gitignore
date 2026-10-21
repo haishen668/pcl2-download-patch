@@ -1,0 +1,15 @@
+# 二进制与备份绝不入库
+*.exe
+*.bak
+*.dll
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
