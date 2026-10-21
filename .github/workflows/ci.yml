@@ -33,6 +33,10 @@ jobs:
       - name: C# 补丁器编译校验
         run: dotnet build src/Patcher -c Release
 
-      - name: 确认仓库不含二进制
+      - name: 确认仓库跟踪的文件不含二进制
         run: |
-          ! find . -path ./.git -prune -o -type f \( -name '*.exe' -o -name '*.dll' -o -name '*.bak' \) -print | grep -q .
+          if git ls-files | grep -Ei '\.(exe|dll|bak)$'; then
+            echo "FAIL: 有二进制被 git 跟踪"; exit 1
+          else
+            echo "OK 无二进制被跟踪"
+          fi
