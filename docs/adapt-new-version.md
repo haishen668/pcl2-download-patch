@@ -9,12 +9,12 @@ pip install dnfile dncil          # 纯 Python 的 .NET 元数据 / IL 解析库
 python tools/pcl2_analyze.py info "Plain Craft Launcher 2.exe"   # 版本指纹与限制点总览
 ```
 
-## 1. 先直接跑 v2 脚本
+## 1. 先直接跑 补丁工具
 
-新版本大概率只是常规重编译（token 与堆偏移变化，代码结构不变），**v2 的语义定位对此免疫**：
+新版本大概率只是常规重编译（token 与堆偏移变化，代码结构不变），**补丁工具的语义定位对此免疫**：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\src\PCL2-RestoreDownload-v2.ps1
+powershell -ExecutionPolicy Bypass -File .\src\restore-download.ps1
 ```
 
 - 三项补丁全部 `[√]`：适配完成，请顺手在 [支持版本表](../README.md#支持版本) 提 PR 补一行（版本号 + 原版 SHA-256）。
@@ -35,7 +35,7 @@ powershell -ExecutionPolicy Bypass -File .\src\PCL2-RestoreDownload-v2.ps1
    python tools/pcl2_analyze.py tokens "Plain Craft Launcher 2.exe"
    ```
    语义版依赖 `DlClientListLoader`（Field）与 `get_CardMinecraft`（MethodDef）这两个名字。
-4. **更新脚本**：修改 `src/PCL2-RestoreDownload-v2.ps1` 中的关键词/形态/锚点，并把旧的字节特征追加到 v1 的历史表（供考古）。
+4. **更新脚本**：修改 `src/restore-download.ps1` 中的关键词/形态/锚点，
 5. **验证**（必做，缺一不可）：
    ```bash
    python tools/pcl2_analyze.py dump …            # IL 逐指令核对（栈平衡、跳转不变）
@@ -54,5 +54,5 @@ powershell -ExecutionPolicy Bypass -File .\src\PCL2-RestoreDownload-v2.ps1
 |---|---|
 | `info <exe>` | 指纹/强名称/限制字符串引用统计 |
 | `dump <exe> [--str 关键词 \| --method 名字]` | 反汇编相关方法 IL |
-| `tokens <exe>` | 打印 v2 依赖的关键元数据 token |
+| `tokens <exe>` | 打印补丁依赖的关键元数据 token |
 | `verify <orig> <patched>` | 对比两份 exe，输出差异区间 |

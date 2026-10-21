@@ -13,3 +13,8 @@ __pycache__/
 Thumbs.db
 .idea/
 .vscode/
+
+# .NET 构建产物
+src/Patcher/bin/
+src/Patcher/obj/
+dist/

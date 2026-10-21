@@ -4,7 +4,7 @@
 
 ## 欢迎的贡献
 
-- **新版本适配**：PCL2 发布新版本后，按 [docs/adapt-new-version.md](docs/adapt-new-version.md) 流程验证 v2 脚本可用性，PR 更新 README 支持版本表（版本号 + 原版 SHA-256）。
+- **新版本适配**：PCL2 发布新版本后，按 [docs/adapt-new-version.md](docs/adapt-new-version.md) 流程验证补丁工具可用性，PR 更新 README 支持版本表（版本号 + 原版 SHA-256）。
 - **脚本改进**：兼容性（如老版本 PowerShell）、定位鲁棒性、报错信息更友好。
 - **文档**：错别字、补充截图、翻译。
 

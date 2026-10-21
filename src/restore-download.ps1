@@ -1,9 +1,9 @@
 # ============================================================
-#  PCL2 恢复 MC 下载功能补丁 v2 —— 语义版（适配多个版本）
-#  相比 v1 不再硬编码元数据编号，运行时解析 .NET 元数据动态定位，
-#  PCL 小版本更新后通常无需改脚本，直接重跑即可。
-#  用法: powershell -ExecutionPolicy Bypass -File .\PCL2-RestoreDownload-v2.ps1 [exe路径]
-#  要求: Windows 10 1803+ (PowerShell 5.1 自带 .NET 4.7.2+) 或 PowerShell 7
+#  PCL2 下载恢复补丁（命令行版）
+#  右键本文件 -> 使用 PowerShell 运行（需放在 PCL 目录），
+#  或: powershell -ExecutionPolicy Bypass -File restore-download.ps1 [exe路径]
+#  原理与 exe 版相同: 移除下载拦截、换回真加载器、恢复组件卡片。
+#  自动备份 .bak，重复运行安全，特征不符时拒绝修改。
 # ============================================================
 param(
     [string]$Path = (Join-Path $PSScriptRoot "Plain Craft Launcher 2.exe")

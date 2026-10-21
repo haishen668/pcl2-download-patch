@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: 编译单文件 exe（self-contained）
+        run: dotnet publish src/Patcher -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -o dist
+
+      - name: 创建 Release 并附产物
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/RestoreDownload.exe
+            src/restore-download.ps1
+          generate_release_notes: true

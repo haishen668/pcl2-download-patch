@@ -27,6 +27,12 @@ jobs:
         run: |
           python -m py_compile tools/pcl2_analyze.py && echo "OK tools/pcl2_analyze.py"
 
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: C# 补丁器编译校验
+        run: dotnet build src/Patcher -c Release
+
       - name: 确认仓库不含二进制
         run: |
           ! find . -path ./.git -prune -o -type f \( -name '*.exe' -o -name '*.dll' -o -name '*.bak' \) -print | grep -q .
